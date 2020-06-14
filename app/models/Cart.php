@@ -26,7 +26,8 @@ class Cart extends Model
     }
 
     public function addProduct($id = null) {
-        $product = Product::where('id', $id)->first();
+        $product = Product::where('id', $id)
+            ->first();
         Session::push('cart', $product);
 
     }

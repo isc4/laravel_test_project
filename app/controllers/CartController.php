@@ -32,14 +32,12 @@ class CartController extends Controller
         return session()->get('cart');
     }
 
-    public function add($id = null) {
-        $cart = new Cart;
+    public function add(Cart $cart, $id = null) {
         $cart->addProduct($id);
         return back()->withInput();
     }
 
-    public function delete($id = null) {
-        $cart = new Cart;
+    public function delete(Cart $cart, $id = null) {
         $cart->deleteProduct($id);
         return back()->withInput();
     }

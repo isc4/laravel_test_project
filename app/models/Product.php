@@ -9,6 +9,7 @@ use App\Controllers\ProductsController;
 
 class Product extends Model
 {
+    public $hidden = ['created_at', 'updated_at'];
 
 
     public function latest() {
@@ -28,17 +29,25 @@ class Product extends Model
             if (session()->has('toggle')) {
                 if (session()->get('toggle') == 'oldest') {
                     $this->latest();
-                    return $products = Product::orderBy('availability', 'desc')->oldest($sorting)->paginate(10);
+                    return $products = Product::orderBy('availability', 'desc')
+                        ->oldest($sorting)
+                        ->paginate(10);
+
                 } else if (session()->get('toggle') == 'latest') {
                     $this->oldest();
-                    return $products = Product::orderBy('availability', 'desc')->latest($sorting)->paginate(10);
+                    return $products = Product::orderBy('availability', 'desc')
+                        ->latest($sorting)
+                        ->paginate(10);
                 }
             } else {
                 $this->oldest();
-                return $products = Product::orderBy('availability', 'desc')->latest($sorting)->paginate(10);
+                return $products = Product::orderBy('availability', 'desc')
+                    ->latest($sorting)
+                    ->paginate(10);
             }
         } else {
-            return $products = Product::orderBy('availability', 'desc')->paginate(10);
+            return $products = Product::orderBy('availability', 'desc')
+                ->paginate(10);
         }
 
     }
